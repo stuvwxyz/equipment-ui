@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import {instanceOf} from "prop-types";
+import {Cookies, withCookies} from "react-cookie";
 
 class EquipmentList extends Component {
 
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    };
+
     constructor(props) {
         super(props);
-        this.state = {equipment: [], isLoading: true};
+        const {cookies} = props;
+        this.state = {equipment: [], csrfToken: cookies.get('XSRF-TOKEN'), isLoading: true};
         this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
         this.setState({isLoading: true});
 
-        fetch('/api/equipment')
+        fetch('/api/equipment', {credentials: 'include'})
             .then(response => response.json())
-            .then(data => this.setState({equipment: data, isLoading: false}));
+            .then(data => this.setState({equipment: data, isLoading: false}))
+            .catch(() => this.props.history.push('/'));
     }
 
     async remove(id) {
         await fetch(`/api/equipment/${id}`, {
             method: 'DELETE',
             headers: {
+                'X-XSRF-TOKEN': this.state.csrfToken,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
+            ,
+            credentials: 'include'
         }).then(() => {
             let updatedEquipment = [...this.state.equipment].filter(i => i.id !== id);
             this.setState({equipment: updatedEquipment});
@@ -90,4 +101,4 @@ class EquipmentList extends Component {
     }
 }
 
-export default EquipmentList;
+export default  withCookies(withRouter(EquipmentList));
