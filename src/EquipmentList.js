@@ -48,12 +48,12 @@ class EquipmentList extends Component {
                 <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentDescription}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentOwner}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentOwnerPhone}</td>
+                <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentOwnerEmail}</td>
 
                 <td>
                     <ButtonGroup className="float-right">
-                        <Button size="sm" color="success" tag={Link} to={"/api/equipment/" + equipment.equipmentId}>Details</Button>
-
-                        <Button size="sm" color="danger" onClick={() => this.remove(equipment.equipmentId)}>Delete</Button>
+                        <Button size="sm" color="primary" tag={Link} to={"/equipmentedit/" + equipment.equipmentId}>Update</Button>
+                        <Button size="sm" color="danger" onClick={() => this.remove(equipment.equipmentId)} >Remove</Button>
                     </ButtonGroup>
                 </td>
             </tr>
@@ -64,18 +64,19 @@ class EquipmentList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/api/equipmentedit/new">Add Equipment</Button>
+                        <Button color="success" tag={Link} to="/equipmentedit/new">Add Equipment</Button>
                     </div>
                     <h3>Equipment List</h3>
                     <Table className="mt-4">
                         <thead>
                         <tr>
-                            <th width="15%">Name</th>
-                            <th width="20%">Age</th>
-                            <th width="20%">Gender</th>
-                            <th width="20%">Race</th>
-                            <th width="20%">Physical Description</th>
-                            <th width="20%">Alive</th>
+                            <th width="10%">Item</th>
+                            <th width="10%">Available</th>
+                            <th width="15%">Rental Cost</th>
+                            <th width="20%">Description</th>
+                            <th width="15%">Owner</th>
+                            <th width="10%">Owner Phone</th>
+                            <th width="15%">Owner Email</th>
                             <th width="10%">Actions</th>
                         </tr>
                         </thead>
