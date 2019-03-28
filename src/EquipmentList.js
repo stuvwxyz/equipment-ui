@@ -42,6 +42,11 @@ class EquipmentList extends Component {
         const equipmentList = equipment.map(equipment => {
 
             return <tr key={equipment.id}>
+                <td>
+                    <ButtonGroup className="float-left">
+                        <Button size="sm" color="primary" tag={Link} to={"/equipmentedit/" + equipment.equipmentId}>Update</Button>
+                    </ButtonGroup>
+                </td>
                 <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentName}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentAvailable}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentCost}</td>
@@ -52,7 +57,6 @@ class EquipmentList extends Component {
 
                 <td>
                     <ButtonGroup className="float-right">
-                        <Button size="sm" color="primary" tag={Link} to={"/equipmentedit/" + equipment.equipmentId}>Update</Button>
                         <Button size="sm" color="danger" onClick={() => this.remove(equipment.equipmentId)} >Remove</Button>
                     </ButtonGroup>
                 </td>
@@ -70,6 +74,7 @@ class EquipmentList extends Component {
                     <Table className="mt-4">
                         <thead>
                         <tr>
+                            <th width="10%">Update</th>
                             <th width="10%">Item</th>
                             <th width="10%">Available</th>
                             <th width="15%">Rental Cost</th>
@@ -77,7 +82,7 @@ class EquipmentList extends Component {
                             <th width="15%">Owner</th>
                             <th width="10%">Owner Phone</th>
                             <th width="15%">Owner Email</th>
-                            <th width="10%">Actions</th>
+                            <th width="10%">Remove</th>
                         </tr>
                         </thead>
                         <tbody>
