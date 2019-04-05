@@ -3,7 +3,6 @@ import './App.css';
 import Home from './Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import EquipmentList from './EquipmentList';
-import EquipmentDisplay from "./EquipmentDisplay";
 import EquipmentEdit from "./EquipmentEdit";
 
 
@@ -14,7 +13,6 @@ class App extends Component {
           <Switch>
             <Route path='/' exact={true} component={Home}/>
             <Route path='/equipment' exact={true} component={EquipmentList}/>
-            <Route path='/equipment/:id' component={EquipmentDisplay}/>
             <Route path='/equipmentedit/:id' component={EquipmentEdit}/>
           </Switch>
         </Router>
