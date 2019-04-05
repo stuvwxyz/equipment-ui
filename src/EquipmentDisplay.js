@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
-class EquipmentEdit extends Component {
+class EquipmentDisplay extends Component {
 
     emptyItem = {
         equipmentName: '',
@@ -20,8 +20,7 @@ class EquipmentEdit extends Component {
         this.state = {
             item: this.emptyItem
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     async componentDidMount() {
@@ -31,33 +30,9 @@ class EquipmentEdit extends Component {
         }
     }
 
-    handleChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        let item = {...this.state.item};
-        item[name] = value;
-        this.setState({item});
-    }
-
-    async handleSubmit(event) {
-        event.preventDefault();
-        const {item} = this.state;
-
-        await fetch('/api/equipment', {
-            method: (item.id) ? 'PUT' : 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item),
-        });
-        this.props.history.push('/equipment');
-    }
-
     render() {
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Equipment' : 'Add Equipment'}</h2>;
+        const title = <h2>Equipment Details</h2>;
 
         return <div>
             <AppNavbar/>
@@ -67,42 +42,34 @@ class EquipmentEdit extends Component {
                     <FormGroup>
                         <Label for="equipmentName">equipmentName</Label>
                         <Input type="text" name="equipmentName" id="equipmentName" value={item.equipmentName || ''}
-                               onChange={this.handleChange} autoComplete="equipmentName"/>
-                    </FormGroup>
-                    <FormGroup>
+                               autoComplete="equipmentName"/>
+
                         <Label for="equipmentAvailable">equipmentAvailable</Label>
-                        <Input type="boolean" name="equipmentAvailable" id="equipmentAvailable" value={item.equipmentAvailable || ''}
-                               onChange={this.handleChange} autoComplete="equipmentAvailable"/>
-                    </FormGroup>
-                    <FormGroup>
+                        <Input type="text" name="equipmentAvailable" id="equipmentAvailable" value={item.equipmentAvailable || ''}
+                               autoComplete="equipmentAvailable"/>
+
                         <Label for="equipmentCost">equipmentCost</Label>
                         <Input type="text" name="equipmentCost" id="equipmentCost" value={item.equipmentCost || ''}
-                               onChange={this.handleChange} autoComplete="equipmentCost"/>
-                    </FormGroup>
-                    <FormGroup>
+                               autoComplete="equipmentCost"/>
+
                         <Label for="equipmentDescription">equipmentDescription</Label>
                         <Input type="text" name="equipmentDescription" id="equipmentDescription" value={item.equipmentDescription || ''}
-                               onChange={this.handleChange} autoComplete="equipmentDescription"/>
-                    </FormGroup>
-                    <FormGroup>
+                               autoComplete="equipmentDescription"/>
+
                         <Label for="equipmentOwner">equipmentOwner</Label>
                         <Input type="text" name="equipmentOwner" id="equipmentOwner" value={item.equipmentOwner || ''}
-                               onChange={this.handleChange} autoComplete="equipmentOwner"/>
-                    </FormGroup>
-                    <FormGroup>
+                               autoComplete="equipmentOwner"/>
+
                         <Label for="equipmentOwnerPhone">equipmentOwnerPhone</Label>
                         <Input type="text" name="equipmentOwnerPhone" id="equipmentOwnerPhone" value={item.equipmentOwnerPhone || ''}
-                               onChange={this.handleChange} autoComplete="equipmentOwnerPhone"/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="equipmentOwnerEmail">equipmentOwnerEmail</Label>
-                        <Input type="text" name="equipmentOwnerEmail" id="equipmentOwnerEmail" value={item.equipmentOwnerEmail || ''}
-                               onChange={this.handleChange} autoComplete="equipmentOwnerEmail"/>
-                    </FormGroup>
+                               autoComplete="equipmentOwnerPhone"/>
 
+                        <Label for="equipmentOwnerEmail">equipmentTerrain</Label>
+                        <Input type="text" name="equipmentOwnerEmail" id="equipmentOwnerEmail" value={item.equipmentOwnerEmail || ''}
+                               autoComplete="equipmentOwnerEmail"/>
+                    </FormGroup>
                     <FormGroup>
-                        <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/equipment">Cancel</Button>
+                        <Button color="success" tag={Link} to="/equipment">Return</Button>
                     </FormGroup>
                 </Form>
             </Container>
@@ -110,4 +77,4 @@ class EquipmentEdit extends Component {
     }
 }
 
-export default withRouter(EquipmentEdit);
+export default withRouter(EquipmentDisplay);
