@@ -1,41 +1,31 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
-import {Link, withRouter} from 'react-router-dom';
-import {instanceOf} from "prop-types";
-import {Cookies, withCookies} from "react-cookie";
+import { Link } from 'react-router-dom';
 
 class EquipmentList extends Component {
 
-    static propTypes = {
-        cookies: instanceOf(Cookies).isRequired
-    };
-
     constructor(props) {
         super(props);
-        const {cookies} = props;
-        this.state = {equipment: [], csrfToken: cookies.get('XSRF-TOKEN'), isLoading: true};
+        this.state = {equipment: [], isLoading: true};
         this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
         this.setState({isLoading: true});
 
-        fetch('/api/equipment', {credentials: 'include'})
+        fetch('/api/equipment')
             .then(response => response.json())
-            .then(data => this.setState({equipment: data, isLoading: false}))
-            .catch(() => this.props.history.push('/'));
+            .then(data => this.setState({equipment: data, isLoading: false}));
     }
 
     async remove(id) {
         await fetch(`/api/equipment/${id}`, {
             method: 'DELETE',
             headers: {
-                'X-XSRF-TOKEN': this.state.csrfToken,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },
-            credentials: 'include'
+            }
         }).then(() => {
             let updatedEquipment = [...this.state.equipment].filter(i => i.id !== id);
             this.setState({equipment: updatedEquipment});
@@ -53,7 +43,7 @@ class EquipmentList extends Component {
 
             return <tr key={equipment.id}>
                 <td>
-                    <ButtonGroup className="float-lef   t">
+                    <ButtonGroup className="float-left">
                         <Button size="sm" color="primary" tag={Link} to={"/equipmentedit/" + equipment.equipmentId}>Update</Button>
                     </ButtonGroup>
                 </td>
@@ -105,4 +95,4 @@ class EquipmentList extends Component {
     }
 }
 
-export default  withCookies(withRouter(EquipmentList));
+export default EquipmentList;
