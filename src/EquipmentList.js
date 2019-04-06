@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from './AppNavbar';
-import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
+import { Link, withRouter } from 'react-router-dom';
+import auth0Client from './Auth';
 
 class EquipmentList extends Component {
 
@@ -33,6 +34,8 @@ class EquipmentList extends Component {
     }
 
     render() {
+        if (!auth0Client.isAuthenticated()) return null;
+
         const {equipment, isLoading} = this.state;
 
         if (isLoading) {
@@ -65,7 +68,7 @@ class EquipmentList extends Component {
 
         return (
             <div>
-                <AppNavbar/>
+                <Navbar/>
                 <Container fluid>
                     <div className="float-right">
                         <Button color="success" tag={Link} to="/equipmentedit/new">Add Equipment</Button>
@@ -95,4 +98,4 @@ class EquipmentList extends Component {
     }
 }
 
-export default EquipmentList;
+export default withRouter(EquipmentList);
