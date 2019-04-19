@@ -7,7 +7,8 @@ class Auth {
             domain: 'gordianknots.auth0.com',
             audience: 'https://gordianknots.auth0.com/userinfo',
             clientID: 'XsDHvnpcFQa2JGoeCFmPrD0v7IUI7iJG',
-            redirectUri: 'https://ics370-equipment.herokuapp.com/callback',
+            // redirectUri: 'https://ics370-equipment.herokuapp.com/callback',
+            redirectUri: 'http://localhost:3000/callback',
             responseType: 'id_token',
             scope: 'openid profile'
         });
@@ -57,7 +58,8 @@ class Auth {
 
     signOut() {
         this.auth0.logout({
-            returnTo: 'https://ics370-equipment.herokuapp.com:3000',
+            // returnTo: 'https://ics370-equipment.herokuapp.com:3000',
+            returnTo: 'http://localhost:3000',
             clientID: 'XsDHvnpcFQa2JGoeCFmPrD0v7IUI7iJG',
         });
     }

@@ -36,10 +36,10 @@ function NavBar(props) {
                         </DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem divider />
-                        <DropdownItem tag="a" href="https://github.com/stuvwxyz/equipment-ui">
+                        <DropdownItem tag="a" href="https://github.com/stuvwxyz/equipment-ui" target="_blank">
                             GitHub UI
                         </DropdownItem>
-                        <DropdownItem tag="a" href="https://github.com/stuvwxyz/equipment-api">
+                        <DropdownItem tag="a" href="https://github.com/stuvwxyz/equipment-api" target="_blank">
                             GitHub API
                         </DropdownItem>
                     </DropdownMenu>
