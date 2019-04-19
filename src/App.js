@@ -4,6 +4,7 @@ import Home from './Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import EquipmentList from './EquipmentList';
 import EquipmentEdit from "./EquipmentEdit";
+import EquipmentCheckout from "./EquipmentCheckout";
 import Callback from './Callback';
 import SecuredRoute from './SecuredRoute/SecuredRoute';
 import auth0Client from './Auth';
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path='/' exact={true} component={Home}/>
             <SecuredRoute path='/equipment' exact={true} component={EquipmentList}/>
             <SecuredRoute path='/equipmentedit/:id' component={EquipmentEdit}/>
+            <SecuredRoute path='/equipmentcheckout/:id' component={EquipmentCheckout}/>
 
             <Route exact path='/callback' component={Callback}/>
           </Switch>
