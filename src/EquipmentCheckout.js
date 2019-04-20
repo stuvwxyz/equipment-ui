@@ -21,7 +21,6 @@ class EquipmentEdit extends Component {
         this.state = {
             item: this.emptyItem,
         };
-        this.emptyItem.equipmentOwner = auth0Client.getProfile().name;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -67,6 +66,7 @@ class EquipmentEdit extends Component {
             <Navbar/>
             <Container>
                 {title}
+                {item.equipmentAvailable = auth0Client.getProfile().name}
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="equipmentName">equipmentName</Label>
@@ -75,7 +75,7 @@ class EquipmentEdit extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="equipmentAvailable">equipmentAvailable</Label>
-                        <Input type="boolean" name="equipmentAvailable" id="equipmentAvailable" value={item.equipmentAvailable || ''}
+                        <Input type="boolean" name="equipmentAvailable" id="equipmentAvailable" value={item.equipmentAvailable}
                                onChange={this.handleChange} autoComplete="equipmentAvailable"/>
                     </FormGroup>
                     <FormGroup>
