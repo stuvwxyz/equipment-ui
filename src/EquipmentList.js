@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Button, ButtonGroup, Container, Nav, Table} from 'reactstrap';
 import Navbar from './Navbar';
-import { Link, withRouter } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import auth0Client from './Auth';
 
 class EquipmentList extends Component {
@@ -49,7 +49,8 @@ class EquipmentList extends Component {
                     equipment.equipmentOwner == auth0Client.getProfile().name &&
                     <td>
                         <ButtonGroup className="float-left">
-                            <Button size="sm" color="primary" tag={Link} to={"/equipmentedit/" + equipment.equipmentId}>Update</Button>
+                            <Button size="sm" color="primary" tag={Link}
+                                    to={"/equipmentedit/" + equipment.equipmentId}>Update</Button>
                         </ButtonGroup>
                     </td>
                 }
@@ -57,20 +58,26 @@ class EquipmentList extends Component {
                     equipment.equipmentOwner !== auth0Client.getProfile().name &&
                     <td>
                         <ButtonGroup className="float-left">
-                            <Button size="sm" color="primary" disabled>Not Owner</Button>
+                            <Button size="sm" color="secondary" disabled>Not Owner</Button>
                         </ButtonGroup>
                     </td>
                 }
                 <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentName}</td>
                 {
                     equipment.equipmentAvailable &&
-                    <td style={{whiteSpace: 'nowrap'}}>{equipment.equipmentAvailable}</td>
+                    <td>
+                        <ButtonGroup className="float-left">
+                            <Button size="sm" color="primary" tag={Link}
+                                    to={"/equipmentcheckin/" + equipment.equipmentId}>{equipment.equipmentAvailable}</Button>
+                        </ButtonGroup>
+                    </td>
                 }
                 {
                     !equipment.equipmentAvailable &&
                     <td>
                         <ButtonGroup className="float-left">
-                            <Button size="sm" color="success" tag={Link} to={"/equipmentcheckout/" + equipment.equipmentId}>Check Out</Button>
+                            <Button size="sm" color="success" tag={Link}
+                                    to={"/equipmentcheckout/" + equipment.equipmentId}>Check Out</Button>
                         </ButtonGroup>
                     </td>
                 }
@@ -84,7 +91,8 @@ class EquipmentList extends Component {
                     equipment.equipmentOwner == auth0Client.getProfile().name &&
                     <td>
                         <ButtonGroup className="float-right">
-                            <Button size="sm" color="danger" onClick={() => this.remove(equipment.equipmentId)} >Remove</Button>
+                            <Button size="sm" color="danger"
+                                    onClick={() => this.remove(equipment.equipmentId)}>Remove</Button>
                         </ButtonGroup>
                     </td>
                 }
@@ -92,7 +100,7 @@ class EquipmentList extends Component {
                     equipment.equipmentOwner !== auth0Client.getProfile().name &&
                     <td>
                         <ButtonGroup className="float-left">
-                            <Button size="sm" color="danger" disabled>Not Owner</Button>
+                            <Button size="sm" color="secondary" disabled>Not Owner</Button>
                         </ButtonGroup>
                     </td>
                 }

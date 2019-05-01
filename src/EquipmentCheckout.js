@@ -60,7 +60,7 @@ class EquipmentEdit extends Component {
         if (!auth0Client.isAuthenticated()) return null;
 
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Equipment' : 'Add Equipment'}</h2>;
+        const title = <h2 color="secondary">Checkout Item</h2>;
 
         return <div>
             <Navbar/>
@@ -69,44 +69,45 @@ class EquipmentEdit extends Component {
                 {item.equipmentAvailable = auth0Client.getProfile().name}
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label for="equipmentName">equipmentName</Label>
+                        <Label for="equipmentName">Name of Item</Label>
                         <Input type="text" name="equipmentName" id="equipmentName" value={item.equipmentName || ''}
                                onChange={this.handleChange} autoComplete="equipmentName"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="equipmentAvailable">equipmentAvailable</Label>
+                        <Label for="equipmentAvailable">Is it Checked Out</Label>
                         <Input type="boolean" name="equipmentAvailable" id="equipmentAvailable" value={item.equipmentAvailable}
                                onChange={this.handleChange} autoComplete="equipmentAvailable"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="equipmentCost">equipmentCost</Label>
+                        <Label for="equipmentCost">Cost</Label>
                         <Input type="text" name="equipmentCost" id="equipmentCost" value={item.equipmentCost || ''}
                                onChange={this.handleChange} autoComplete="equipmentCost"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="equipmentDescription">equipmentDescription</Label>
+                        <Label for="equipmentDescription">Description</Label>
                         <Input type="text" name="equipmentDescription" id="equipmentDescription" value={item.equipmentDescription || ''}
                                onChange={this.handleChange} autoComplete="equipmentDescription"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="equipmentOwner">equipmentOwner</Label>
+                        <Label for="equipmentOwner">Owner</Label>
                         <Input type="text" name="equipmentOwner" id="equipmentOwner" value={item.equipmentOwner}
                                onChange={this.handleChange} autoComplete="equipmentOwner"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="equipmentOwnerPhone">equipmentOwnerPhone</Label>
+                        <Label for="equipmentOwnerPhone">Owner Phone Number</Label>
                         <Input type="text" name="equipmentOwnerPhone" id="equipmentOwnerPhone" value={item.equipmentOwnerPhone || ''}
                                onChange={this.handleChange} autoComplete="equipmentOwnerPhone"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="equipmentOwnerEmail">equipmentOwnerEmail</Label>
+                        <Label for="equipmentOwnerEmail">Owner Email</Label>
                         <Input type="text" name="equipmentOwnerEmail" id="equipmentOwnerEmail" value={item.equipmentOwnerEmail || ''}
                                onChange={this.handleChange} autoComplete="equipmentOwnerEmail"/>
                     </FormGroup>
 
                     <FormGroup>
-                        <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/equipment">Cancel</Button>
+                        <Button color="primary" type="submit">Save</Button>{'  '}
+                        <Button color="secondary" tag={Link} to="/equipment">Cancel</Button>{'  '}
+                        <Button color="primary" tag="a" href="https://www.paypal.com/us/home" target="_blank">Pay for Item</Button>{'  '}
                     </FormGroup>
                 </Form>
             </Container>
