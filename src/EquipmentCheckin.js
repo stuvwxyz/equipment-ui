@@ -21,7 +21,6 @@ class EquipmentEdit extends Component {
         this.state = {
             item: this.emptyItem,
         };
-        this.emptyItem.equipmentOwner = auth0Client.getProfile().name;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -61,12 +60,13 @@ class EquipmentEdit extends Component {
         if (!auth0Client.isAuthenticated()) return null;
 
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Equipment' : 'Add Equipment'}</h2>;
+        const title = <h2 color="primary">Checkin Item</h2>;
 
         return <div>
             <Navbar/>
             <Container>
                 {title}
+                {item.equipmentAvailable = ''}
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="equipmentName">Name of Item</Label>
@@ -75,7 +75,7 @@ class EquipmentEdit extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="equipmentAvailable">Is it Checked Out</Label>
-                        <Input type="boolean" name="equipmentAvailable" id="equipmentAvailable" value={item.equipmentAvailable || ''}
+                        <Input type="boolean" name="equipmentAvailable" id="equipmentAvailable" value={item.equipmentAvailable}
                                onChange={this.handleChange} autoComplete="equipmentAvailable"/>
                     </FormGroup>
                     <FormGroup>
@@ -105,7 +105,7 @@ class EquipmentEdit extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Button color="primary" type="submit">Save</Button>{' '}
+                        <Button color="primary" type="submit">Save</Button>{'  '}
                         <Button color="secondary" tag={Link} to="/equipment">Cancel</Button>
                     </FormGroup>
                 </Form>
